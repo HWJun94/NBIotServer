@@ -13,7 +13,7 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel>{
     //SslContext
     private static SslContext sslContext;
     private RequestDispatcher requestDispatcher;
-    private static final EventExecutorGroup eventExecutorGroup = new DefaultEventExecutorGroup(16);
+    private static final EventExecutorGroup eventExecutorGroup = new DefaultEventExecutorGroup(8);
 
     public HttpServerInitializer(SslContext sslContext, RequestDispatcher rd) {
         this.sslContext = sslContext;
@@ -29,6 +29,6 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel>{
                 .addLast("aggregator", new HttpObjectAggregator(1048576))
                 .addLast("encoder", new HttpResponseEncoder())
                 .addLast(new HttpServerExpectContinueHandler())
-                .addLast(eventExecutorGroup, new HttpServerWorker(requestDispatcher));
+                .addLast(new HttpServerWorker(requestDispatcher));
     }
 }

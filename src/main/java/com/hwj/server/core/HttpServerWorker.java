@@ -25,6 +25,7 @@ public class HttpServerWorker extends ChannelInboundHandlerAdapter {
             throw new Exception("There should be a RequestDispatcher and not null!");
         }
         requestDispatcher.dispatch(ctx, request);
+        super.channelRead(ctx, request);
     }
 
     @Override

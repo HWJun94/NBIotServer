@@ -20,7 +20,7 @@ public class HttpServer {
 
     //constructor
     public HttpServer(RequestDispatcher rd) {
-        this("localhost", 8080, rd);
+        this("192.168.6.125", 8080, rd);
     }
 
     public HttpServer(String ip, int serverPort, RequestDispatcher rd) {
@@ -35,6 +35,10 @@ public class HttpServer {
         this.requestDispatcher = rd;
     }
 
+    /**
+     * HttpSever 的启动方法，包含初始化过程以及优雅退出
+     * @throws Exception
+     */
     public void start() throws Exception {
         //Configure the server
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
